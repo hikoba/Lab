@@ -40,8 +40,10 @@ def alert_received():
     message = "Hi, I am a Webex Teams bot. Have a great day ☀! "
 
     # uncomment if you are implementing a notifier bot
- 
+    '''
     api.messages.create(roomId=WT_ROOM_ID, markdown=message)
+    '''
+    api.messages.create(roomId=WT_ROOM_ID, markdown=raw_json)
  
 
 

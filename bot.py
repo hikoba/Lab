@@ -20,10 +20,10 @@ import os
 WT_BOT_TOKEN = os.environ['WT_BOT_TOKEN']
 
 # uncomment next line if you are implementing a notifier bot
-#WT_ROOM_ID = os.environ['WT_ROOM_ID']
+WT_ROOM_ID = os.environ['WT_ROOM_ID']
 
 # uncomment next line if you are implementing a controller bot
-WT_BOT_EMAIL = os.environ['WT_BOT_EMAIL']
+#WT_BOT_EMAIL = os.environ['WT_BOT_EMAIL']
 
 # start Flask and WT connection
 app = Flask(__name__)
@@ -37,12 +37,15 @@ def alert_received():
     print(raw_json)
 
     # customize the behaviour of the bot here
-    message = "Hi, I am a Webex Teams bot. Have a great day ☀! "
+    #message = "Hi, I am a Webex Teams bot. Have a great day ☀! "
+    message = raw_json
 
     # uncomment if you are implementing a notifier bot
     '''
     api.messages.create(roomId=WT_ROOM_ID, markdown=message)
     '''
+    api.messages.create(roomId=WT_ROOM_ID, markdown=message)
+    
     
 
     # uncomment if you are implementing a controller bot
@@ -53,12 +56,6 @@ def alert_received():
         api.messages.create(roomId=WT_ROOM_ID, markdown=message)
     '''
     
-    WT_ROOM_ID = raw_json['data']['roomId']
-    personEmail_json = raw_json['data']['personEmail']
-    if personEmail_json != WT_BOT_EMAIL:
-        api.messages.create(roomId=WT_ROOM_ID, markdown=message)
-    
-
     return jsonify({'success': True})
 
 if __name__=="__main__":

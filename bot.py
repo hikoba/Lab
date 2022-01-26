@@ -43,7 +43,7 @@ def alert_received():
     '''
     api.messages.create(roomId=WT_ROOM_ID, markdown=message)
     '''
-    api.messages.create(roomId=WT_ROOM_ID, markdown=raw_json)
+    api.messages.create(roomId=WT_ROOM_ID, markdown=raw_json['data'])
  
 
 
